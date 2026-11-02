@@ -460,13 +460,12 @@ def generate_zip(
         # Always include the four requested directories.
         for directory in CONTENT_DIRECTORIES:
             write_zip_directory(archive, directory)
-            
-        # Templates.
-        for source, destination in sources["templates"]:
+        # KiCad project templates.
+        if sources["templates"] is not None:
             install_size += add_directory_contents(
                 archive,
-                source,
-                destination
+                sources["templates"],
+                "templates"
             )
 
         # Footprint libraries.
