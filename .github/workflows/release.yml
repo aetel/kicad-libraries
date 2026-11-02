@@ -13,8 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout tagged source
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Build PCM package
         id: package
@@ -54,18 +56,172 @@ jobs:
           SHA256=$(sha256sum build/aetel-kicad-addon.zip | cut -d ' ' -f 1)
           SIZE=$(stat -c '%s' build/aetel-kicad-addon.zip)
 
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "sha256=$SHA256" >> "$GITHUB_OUTPUT"
           echo "size=$SIZE" >> "$GITHUB_OUTPUT"
 
-          echo "Package version: $VERSION"
+          echo "Version: $VERSION"
           echo "SHA256: $SHA256"
-          echo "Download size: $SIZE bytes"
+          echo "Size: $SIZE bytes"
 
       - name: Publish GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" \
-            build/aetel-kicad-addon.zip \
-            --title "AETEL KiCad Libraries ${GITHUB_REF_NAME#v}" \
-            --generate-notes
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" \
+              build/aetel-kicad-addon.zip \
+              --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" \
+              build/aetel-kicad-addon.zip \
+              --title "AETEL KiCad Libraries ${GITHUB_REF_NAME#v}" \
+              --generate-notes
+          fi
+
+      - name: Update PCM indexes
+        env:
+          VERSION: ${{ steps.package.outputs.version }}
+          ZIP_SHA256: ${{ steps.package.outputs.sha256 }}
+          ZIP_SIZE: ${{ steps.package.outputs.size }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+
+          export VERSION ZIP_SHA256 ZIP_SIZE RELEASE_TAG
+
+          python3 <<'PY'
+          import json
+          import hashlib
+          import os
+          import time
+          from pathlib import Path
+
+          pcm = Path("pcm")
+          packages_path = pcm / "packages.json"
+          repository_path = pcm / "repository.json"
+
+          version = os.environ["VERSION"]
+          release_tag = os.environ["RELEASE_TAG"]
+
+          download_url = (
+              f"https://github.com/{os.environ['GITHUB_REPOSITORY']}"
+              f"/releases/download/{release_tag}/aetel-kicad-addon.zip"
+          )
+
+          # Load the package's canonical metadata.
+          with open(pcm / "metadata.json", encoding="utf-8") as f:
+              metadata = json.load(f)
+
+          # Load the existing package index.
+          with open(packages_path, encoding="utf-8") as f:
+              package_index = json.load(f)
+
+          package_index.setdefault("packages", [])
+
+          # Build the version entry for this release.
+          new_version = {
+              "version": version,
+              "status": "testing",
+              "kicad_version": "10.0",
+              "download_url": download_url,
+              "download_sha256": os.environ["ZIP_SHA256"],
+              "download_size": int(os.environ["ZIP_SIZE"])
+          }
+
+          # Preserve previous versions, replacing this version if it exists.
+          existing_package = next(
+              (
+                  p for p in package_index["packages"]
+                  if p.get("identifier") == metadata["identifier"]
+              ),
+              None
+          )
+
+          versions = (
+              existing_package.get("versions", [])
+              if existing_package else []
+          )
+
+          versions = [
+              v for v in versions
+              if v.get("version") != version
+          ]
+          versions.append(new_version)
+
+          # Use metadata.json as the canonical package description.
+          package = metadata.copy()
+          package["versions"] = versions
+
+          if existing_package:
+              index = package_index["packages"].index(existing_package)
+              package_index["packages"][index] = package
+          else:
+              package_index["packages"].append(package)
+
+          # Write the updated package index.
+          with open(packages_path, "w", encoding="utf-8") as f:
+              json.dump(package_index, f, indent=2, ensure_ascii=False)
+              f.write("\n")
+
+          # Calculate the exact hash of the file just written.
+          packages_bytes = packages_path.read_bytes()
+          packages_sha256 = hashlib.sha256(packages_bytes).hexdigest()
+          update_timestamp = int(time.time())
+
+          # Load repository.json, or create it if it does not exist yet.
+          if repository_path.exists():
+              with open(repository_path, encoding="utf-8") as f:
+                  repository = json.load(f)
+          else:
+              repository = {
+                  "$schema": (
+                      "https://go.kicad.org/pcm/schemas/v2"
+                      "#/definitions/Repository"
+                  ),
+                  "schema_version": 2,
+                  "name": metadata["name"],
+                  "maintainer": metadata.get(
+                      "maintainer", metadata.get("author", {})
+                  )
+              }
+
+          repository["$schema"] = (
+              "https://go.kicad.org/pcm/schemas/v2"
+              "#/definitions/Repository"
+          )
+          repository["schema_version"] = 2
+
+          repository["packages"] = {
+              "url": (
+                  "https://raw.githubusercontent.com/"
+                  "aetel/kicad-libraries/main/pcm/packages.json"
+              ),
+              "sha256": packages_sha256,
+              "update_timestamp": update_timestamp
+          }
+
+          # Write the updated repository descriptor.
+          with open(repository_path, "w", encoding="utf-8") as f:
+              json.dump(repository, f, indent=2, ensure_ascii=False)
+              f.write("\n")
+
+          print(f"Updated package version: {version}")
+          print(f"packages.json SHA256: {packages_sha256}")
+          print(f"repository timestamp: {update_timestamp}")
+          print(f"Download URL: {download_url}")
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add pcm/packages.json pcm/repository.json
+
+          if git diff --cached --quiet; then
+            echo "No index changes to commit."
+          else
+            git commit -m "Update PCM index for ${RELEASE_TAG}"
+            git push origin HEAD:main
+          fi
+
