@@ -50,8 +50,7 @@
           "download_sha256": "85f5d1bbb633580b6cdddd5f52118a641e241607582735a6ec400b14d6095a5d",
           "download_size": 145488
         }
-      ],
-      "$schema": "https://go.kicad.org/pcm/schemas/v2"
+      ]
     }
   ]
 }
