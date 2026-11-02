@@ -10,7 +10,7 @@ Generates:
 Expected source directories:
     AETEL.pretty/          Footprint libraries
     AETEL.3dshapes/        3D model libraries
-    symbols/               KiCad symbol libraries
+    symbols/               KiCad symbol libraries (.kicad_sym, .kicad_httplib)
     resources/icon.png     PCM package icon (64x64 PNG)
 
 Usage:
@@ -297,8 +297,10 @@ def validate_sources() -> dict[str, Any]:
 
     if symbols:
         symbol_files = sorted(
-            path for path in symbols.rglob("*.kicad_sym")
+            path
+            for path in symbols.rglob("*")
             if path.is_file()
+            and path.suffix.lower() in {".kicad_sym", ".kicad_httplib"}
         )
 
     if not footprints and not models and not symbol_files:
@@ -457,9 +459,10 @@ def generate_zip(
 
         install_size += len(metadata_bytes)
 
-        # Always include the four requested directories.
+        # Always include the package content directories.
         for directory in CONTENT_DIRECTORIES:
             write_zip_directory(archive, directory)
+            
         # KiCad project templates.
         if sources["templates"] is not None:
             install_size += add_directory_contents(
