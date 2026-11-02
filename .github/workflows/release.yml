@@ -1,0 +1,71 @@
+name: Build and publish KiCad PCM package
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build PCM package
+        id: package
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+
+          mkdir -p build/package/footprints
+          mkdir -p build/package/3dmodels
+
+          cp -a AETEL.pretty build/package/footprints/
+          cp -a AETEL.3dshapes build/package/3dmodels/
+
+          export VERSION
+
+          python3 <<'PY'
+          import json
+          import os
+
+          with open("pcm/metadata.json", encoding="utf-8") as f:
+              metadata = json.load(f)
+
+          metadata["versions"] = [{
+              "version": os.environ["VERSION"],
+              "status": "stable",
+              "kicad_version": "10.0.0"
+          }]
+
+          with open("build/package/metadata.json", "w", encoding="utf-8") as f:
+              json.dump(metadata, f, indent=2, ensure_ascii=False)
+              f.write("\n")
+          PY
+
+          cd build/package
+          zip -r ../aetel-kicad-addon.zip metadata.json footprints 3dmodels
+          cd ../..
+
+          SHA256=$(sha256sum build/aetel-kicad-addon.zip | cut -d ' ' -f 1)
+          SIZE=$(stat -c '%s' build/aetel-kicad-addon.zip)
+
+          echo "sha256=$SHA256" >> "$GITHUB_OUTPUT"
+          echo "size=$SIZE" >> "$GITHUB_OUTPUT"
+
+          echo "Package version: $VERSION"
+          echo "SHA256: $SHA256"
+          echo "Download size: $SIZE bytes"
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            build/aetel-kicad-addon.zip \
+            --title "AETEL KiCad Libraries ${GITHUB_REF_NAME#v}" \
+            --generate-notes

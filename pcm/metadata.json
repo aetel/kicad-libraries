@@ -1,0 +1,31 @@
+{
+  "$schema": "https://go.kicad.org/pcm/schemas/v2",
+  "name": "AETEL KiCad Libraries",
+  "description": "Custom footprints and 3D models for AETEL projects.",
+  "description_full": "KiCad footprint and 3D model library maintained by AETEL. Contains custom component footprints and mechanical models used in association projects.",
+  "identifier": "com.github.aetel.kicad-libraries",
+  "type": "library",
+  "author": {
+    "name": "AETEL",
+    "contact": {
+      "web": "https://aetel.org"
+    }
+  },
+  "maintainer": {
+    "name": "AETEL",
+    "contact": {
+      "web": "https://aetel.org"
+    }
+  },
+  "license": "CC-BY-4.0",
+  "resources": {
+    "homepage": "https://github.com/aetel/kicad-libraries"
+  },
+  "versions": [
+    {
+      "version": "0.1.0",
+      "status": "testing",
+      "kicad_version": "10.0"
+    }
+  ]
+}
