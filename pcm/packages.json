@@ -2,9 +2,10 @@
   "$schema": "https://go.kicad.org/pcm/schemas/v2#/definitions/PackageArray",
   "packages": [
     {
+      "$schema": "https://go.kicad.org/pcm/schemas/v2",
       "name": "AETEL KiCad Libraries",
       "description": "Custom footprints and 3D models for AETEL projects.",
-      "description_full": "KiCad footprint and 3D model library maintained by AETEL.",
+      "description_full": "KiCad footprint and 3D model library maintained by AETEL. Contains custom component footprints and mechanical models used in association projects.",
       "identifier": "com.github.aetel.kicad-libraries",
       "type": "library",
       "author": {
@@ -31,6 +32,14 @@
           "download_url": "https://github.com/aetel/kicad-libraries/releases/download/v0.1.0/aetel-kicad-addon.zip",
           "download_sha256": "dd78a4e44ba15c6e7b0394f5f4ad0fb1a8e2f43a8b5d60c5f05d3a2a422cbe3b",
           "download_size": 145486
+        },
+        {
+          "version": "0.1.1",
+          "status": "testing",
+          "kicad_version": "10.0",
+          "download_url": "https://github.com/aetel/kicad-libraries/releases/download/v0.1.1/aetel-kicad-addon.zip",
+          "download_sha256": "85f5d1bbb633580b6cdddd5f52118a641e241607582735a6ec400b14d6095a5d",
+          "download_size": 145488
         }
       ]
     }
