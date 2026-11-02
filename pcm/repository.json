@@ -1,0 +1,17 @@
+{
+  "$schema": "https://go.kicad.org/pcm/schemas/v2#/definitions/Repository",
+  "schema_version": 2,
+  "name": "AETEL KiCad Libraries",
+  "maintainer": {
+    "name": "AETEL",
+    "contact": {
+      "web": "https://aetel.org"
+    }
+  },
+  "packages": {
+    "url": "https://raw.githubusercontent.com/aetel/kicad-libraries/main/pcm/packages.json",
+    "update_timestamp": 1793643441,
+    "sha256": "3862b768e404717365e488972f8ffb9fa6b7467f333a92ea6c2a147372c77236"
+  }
+}
+
