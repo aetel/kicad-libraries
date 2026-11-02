@@ -77,6 +77,7 @@ CONTENT_DIRECTORIES = (
     "3dmodels",
     "symbols",
     "resources",
+    "templates",
 )
 
 ZIP_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
@@ -254,6 +255,15 @@ def collect_library_directories(
 
     return result
 
+def collect_templates_directory() -> Path | None:
+    """Find the templates source directory."""
+
+    directory = ROOT / "template"
+
+    if directory.is_dir():
+        return directory
+
+    return None
 
 def collect_symbols_directory() -> Path | None:
     """Find the symbols source directory."""
@@ -268,6 +278,8 @@ def collect_symbols_directory() -> Path | None:
 
 def validate_sources() -> dict[str, Any]:
     """Validate all package source directories."""
+    
+    templates = collect_templates_directory()
 
     footprints = collect_library_directories(
         ".pretty",
@@ -309,6 +321,7 @@ def validate_sources() -> dict[str, Any]:
         "symbol_files": symbol_files,
         "icon": icon,
         "resources": resources,
+        "templates": templates,
     }
 
 
@@ -447,6 +460,14 @@ def generate_zip(
         # Always include the four requested directories.
         for directory in CONTENT_DIRECTORIES:
             write_zip_directory(archive, directory)
+            
+        # Templates.
+        for source, destination in sources["templates"]:
+            install_size += add_directory_contents(
+                archive,
+                source,
+                destination
+            )
 
         # Footprint libraries.
         for source, destination in sources["footprints"]:
