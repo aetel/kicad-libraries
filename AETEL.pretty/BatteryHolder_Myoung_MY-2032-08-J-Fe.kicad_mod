@@ -1,76 +1,292 @@
 (footprint "BatteryHolder_Myoung_MY-2032-08-J-Fe"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "Portapila/sujecion CR2032 SMD, terminal (+), Myoung MY-2032-08-J-Fe, acero SPCC t=0.25 niquelado. Pads 1.75x5.60, pitch 23.50")
 	(tags "CR2032 battery holder retainer clip MY-2032-08-J-Fe")
-	(attr smd)
-	(fp_text reference "REF**"
+	(property "Reference" "REF**"
 		(at 0 -9.1 0)
 		(layer "F.SilkS")
-		(effects (font (size 1 1) (thickness 0.15)))
+		(uuid "d8ff0741-0003-49c3-9f86-5497fe173e8f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
 	)
-	(fp_text value "BatteryHolder_Myoung_MY-2032-08-J-Fe"
+	(property "Value" "BatteryHolder_Myoung_MY-2032-08-J-Fe"
 		(at 0 9.1 0)
 		(layer "F.Fab")
-		(effects (font (size 1 1) (thickness 0.15)))
+		(uuid "ce2a4679-9473-4eed-b112-e97064055296")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
 	)
-	(fp_text user "${REFERENCE}"
+	(property "Datasheet" "https://www.lcsc.com/datasheet/C19184094.pdf"
 		(at 0 0 0)
 		(layer "F.Fab")
-		(effects (font (size 1 1) (thickness 0.15)))
+		(hide yes)
+		(uuid "2254b241-535f-4e9a-9ffb-84036fc7385b")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "9f940357-69af-4302-bd9e-02cdb3565770")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Part-DB URL" "https://partdb.aetel.org/en/part/69/info"
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "f28f154b-78a9-425a-8594-127498b6b3f9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Part-DB ID" ""
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "81b38bf8-a5f8-47bf-bb8a-9bfcdbb9bedd")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -7.7 -7.9)
+		(end -11.7 -3.9)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "ea57c743-0c51-46ba-83f4-d57428ce38d8")
+	)
+	(fp_line
+		(start -7.7 -7.9)
+		(end 7.7 -7.9)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "1b62ecce-e214-46ad-82bc-821f02947998")
+	)
+	(fp_line
+		(start -7.7 7.9)
+		(end -11.7 3.9)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "9754430f-1f73-414b-9698-6df1926377d9")
+	)
+	(fp_line
+		(start -7.7 7.9)
+		(end 7.7 7.9)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "929d68b6-d71e-47bf-965c-a007036c7020")
+	)
+	(fp_line
+		(start 7.7 -7.9)
+		(end 11.7 -3.9)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "35074566-de3e-46bd-9add-b5bd9a0c3e3e")
+	)
+	(fp_line
+		(start 7.7 7.9)
+		(end 11.7 3.9)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "d6ce8eed-ed9c-46ab-92ec-c8ecd52283b4")
+	)
+	(fp_rect
+		(start -12.75 -8.25)
+		(end 12.75 8.25)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "790fa4de-2e64-4c50-9788-091a24be84e4")
+	)
+	(fp_line
+		(start -11.4 -3.6)
+		(end -11.4 3.6)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "044b316a-4146-491a-85a2-1aecc4fb0f02")
+	)
+	(fp_line
+		(start -11.4 3.6)
+		(end -7.4 7.6)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "22d55389-b552-420a-bba7-979dcc593ca0")
+	)
+	(fp_line
+		(start -7.4 -7.6)
+		(end -11.4 -3.6)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "6794f955-4514-4328-8c7a-2b9f75bdab17")
+	)
+	(fp_line
+		(start -7.4 7.6)
+		(end 7.4 7.6)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "706f6c46-3481-400a-b1f3-457b630a23f1")
+	)
+	(fp_line
+		(start 7.4 -7.6)
+		(end -7.4 -7.6)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "4343b373-64b2-44c5-bb72-4da36383c4e9")
+	)
+	(fp_line
+		(start 7.4 7.6)
+		(end 11.4 3.6)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "fa0a895a-ed43-4421-9ef3-1c69eff6492d")
+	)
+	(fp_line
+		(start 11.4 -3.6)
+		(end 7.4 -7.6)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "eb785e9d-1bce-4425-baca-b41f653e0418")
+	)
+	(fp_line
+		(start 11.4 3.6)
+		(end 11.4 -3.6)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "48354577-80f0-4bab-b3cb-1998fd8fa806")
+	)
+	(fp_circle
+		(center 0 0)
+		(end 10 0)
+		(stroke
+			(width 0.1)
+			(type dash)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "7d83c704-b8c3-4ad7-a339-9fb7b4623bf4")
 	)
 	(fp_text user "+"
 		(at 0 8.6 0)
 		(layer "F.SilkS")
-		(effects (font (size 1 1) (thickness 0.15)))
+		(uuid "308e7dbc-d416-40e5-bffc-a0f500a278cf")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
 	)
-	(fp_line (start -7.4 7.6) (end 7.4 7.6)
-		(stroke (width 0.1) (type solid)) (layer "F.Fab"))
-	(fp_line (start 7.4 7.6) (end 11.4 3.6)
-		(stroke (width 0.1) (type solid)) (layer "F.Fab"))
-	(fp_line (start 11.4 3.6) (end 11.4 -3.6)
-		(stroke (width 0.1) (type solid)) (layer "F.Fab"))
-	(fp_line (start 11.4 -3.6) (end 7.4 -7.6)
-		(stroke (width 0.1) (type solid)) (layer "F.Fab"))
-	(fp_line (start 7.4 -7.6) (end -7.4 -7.6)
-		(stroke (width 0.1) (type solid)) (layer "F.Fab"))
-	(fp_line (start -7.4 -7.6) (end -11.4 -3.6)
-		(stroke (width 0.1) (type solid)) (layer "F.Fab"))
-	(fp_line (start -11.4 -3.6) (end -11.4 3.6)
-		(stroke (width 0.1) (type solid)) (layer "F.Fab"))
-	(fp_line (start -11.4 3.6) (end -7.4 7.6)
-		(stroke (width 0.1) (type solid)) (layer "F.Fab"))
-	(fp_circle (center 0 0) (end 10 0)
-		(stroke (width 0.1) (type dash)) (layer "F.Fab"))
-	(fp_line (start -7.7 7.9) (end 7.7 7.9)
-		(stroke (width 0.12) (type solid)) (layer "F.SilkS"))
-	(fp_line (start 7.7 7.9) (end 11.7 3.9)
-		(stroke (width 0.12) (type solid)) (layer "F.SilkS"))
-	(fp_line (start -7.7 7.9) (end -11.7 3.9)
-		(stroke (width 0.12) (type solid)) (layer "F.SilkS"))
-	(fp_line (start -7.7 -7.9) (end 7.7 -7.9)
-		(stroke (width 0.12) (type solid)) (layer "F.SilkS"))
-	(fp_line (start 7.7 -7.9) (end 11.7 -3.9)
-		(stroke (width 0.12) (type solid)) (layer "F.SilkS"))
-	(fp_line (start -7.7 -7.9) (end -11.7 -3.9)
-		(stroke (width 0.12) (type solid)) (layer "F.SilkS"))
-	(fp_rect (start -12.75 -8.25) (end 12.75 8.25)
-		(stroke (width 0.05) (type solid)) (layer "F.CrtYd"))
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "31a4388c-39dd-4506-bb51-b14dc408d889")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
 	(pad "1" smd rect
 		(at -11.75 0)
 		(size 1.75 5.6)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "802626a0-fc7e-470e-ac2f-9b796d828ad5")
 	)
 	(pad "1" smd rect
 		(at 11.75 0)
 		(size 1.75 5.6)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "33110ae9-bc91-423e-b408-b2cc4d48bbcd")
 	)
-	(model "${KIPRJMOD}/BatteryHolder_Myoung_MY-2032-08-J-Fe.step"
-		(offset (xyz 0 0 0))
-		(scale (xyz 1 1 1))
-		(rotate (xyz 0 0 0))
+	(pad "2" smd rect
+		(at 0 0)
+		(size 5.6 5.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "0d1eba11-0827-4967-98e0-ef5a59720514")
+	)
+	(embedded_fonts no)
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_aetel_kicad-libraries/AETEL.3dshapes/BatteryHolder_Myoung_MY-2032-08-J-Fe.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
 	)
 )
