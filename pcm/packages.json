@@ -26,6 +26,15 @@
       },
       "versions": [
         {
+          "version": "1.1.0",
+          "status": "testing",
+          "kicad_version": "10.0",
+          "download_url": "https://github.com/aetel/kicad-libraries/releases/download/v1.1.0/aetel-kicad-addon.zip",
+          "download_sha256": "077b266e7f6d39ef2438b7e2201d8b18c4b60993515b06d4b665b4dd5a5412e2",
+          "download_size": 402859,
+          "install_size": 1159863
+        },
+        {
           "version": "1.0.0",
           "status": "testing",
           "kicad_version": "10.0",
