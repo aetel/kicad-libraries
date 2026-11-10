@@ -10,7 +10,7 @@
   },
   "packages": {
     "url": "https://raw.githubusercontent.com/aetel/kicad-libraries/main/pcm/packages.json",
-    "update_timestamp": 1793712728,
-    "sha256": "713a35761558ca6cd8e10128860242f925d75d1849a20c0095ce3f6181d9e6ca"
+    "update_timestamp": 1794332544,
+    "sha256": "997afd9c97aa33c0e07afa349ac9866640844e17506bf8b4411e1b4c685798dd"
   }
 }
