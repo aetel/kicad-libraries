@@ -6,9 +6,9 @@
 	(descr "USB 3.1 Type-C receptacle, 16 pin (12 SMT pads + 4 THT shell legs), top mount, Jing Tuo Jin 918-418K2023S40062")
 	(tags "USB-C USB Type-C receptacle 16P")
 	(property "Reference" "REF**"
-		(at 0 -3.2 0)
+		(at 0 -3.5 0)
 		(layer "F.SilkS")
-		(uuid "f50bc32f-8aa0-414b-9dcc-53e595024536")
+		(uuid "5a7ea942-7473-4993-88a1-78a4008abe99")
 		(effects
 			(font
 				(size 1 1)
@@ -19,7 +19,7 @@
 	(property "Value" "USB_C_Receptacle_JTJ_918-418K2023S40062_16P"
 		(at 0 7.6 0)
 		(layer "F.Fab")
-		(uuid "6c8979ce-786e-4100-8076-2e8c0046afc0")
+		(uuid "6eba27b3-a8b5-48cb-81d5-15a7cd6ff9db")
 		(effects
 			(font
 				(size 1 1)
@@ -31,7 +31,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "b9699d39-85ad-4a8d-af6a-1826547518e7")
+		(uuid "b156e494-3cd7-4b5c-9512-9eec8cd46135")
 		(effects
 			(font
 				(size 1 1)
@@ -43,7 +43,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "0b5c934e-e613-48a7-91f6-764f92350d5b")
+		(uuid "72daad8b-b708-443d-8470-deeca523bcc5")
 		(effects
 			(font
 				(size 1 1)
